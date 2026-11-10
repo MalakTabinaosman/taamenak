@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:taamenak/core/utils/validators.dart';
 import 'package:taamenak/core/widgets/custom_text_field.dart';
+import 'package:taamenak/ui/home/buttom_navigation_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login';
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
           child: Form(
             key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -145,6 +146,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       elevation: 0,
                     ),
                     onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        HomeScreen.routeName,
+                      );
                       if (_formKey.currentState!.validate()) {
                         // إذا كانت المدخلات صحيحة، قم بتنفيذ تسجيل الدخول هنا
                         ScaffoldMessenger.of(context).showSnackBar(

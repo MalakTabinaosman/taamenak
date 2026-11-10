@@ -162,5 +162,30 @@ class AppTheme {
         fontSize: 10,
       ),
     ),
+
+    cardTheme: CardThemeData(
+      color: appColors.backgroundColor,
+      elevation: 1,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    ),
+
+    chipTheme: ChipThemeData(
+      backgroundColor: appColors.backgroundColor,
+      side: BorderSide.none,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      labelStyle: TextStyle(
+        color: appColors.mainTextColor,
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+      ),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+    ),
+
+    dividerTheme: DividerThemeData(
+      color: appColors.strokeColor,
+      thickness: 1,
+      space: 1,
+    ),
   );
 }

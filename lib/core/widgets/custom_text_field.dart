@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class customTextField extends StatelessWidget {
+class CustomTextField extends StatelessWidget {
   final String label;
   final String hint;
   final IconData icon;
@@ -11,7 +11,7 @@ class customTextField extends StatelessWidget {
   final bool obscureText;
   final Widget? suffixIcon;
 
-  const customTextField({
+  const CustomTextField({
     super.key,
     required this.label,
     required this.hint,
@@ -27,11 +27,10 @@ class customTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       
         Text(
           label,
           style: theme.textTheme.titleSmall?.copyWith(
@@ -40,7 +39,6 @@ class customTextField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 6),
-        
         TextFormField(
           controller: controller,
           obscureText: isPassword ? obscureText : false,
@@ -49,7 +47,7 @@ class customTextField extends StatelessWidget {
           style: theme.textTheme.bodyMedium,
           decoration: InputDecoration(
             hintText: hint,
-            prefixIcon: Icon(icon), 
+            prefixIcon: Icon(icon),
             suffixIcon: suffixIcon,
           ),
         ),
@@ -57,3 +55,6 @@ class customTextField extends StatelessWidget {
     );
   }
 }
+
+// ignore: camel_case_types
+typedef customTextField = CustomTextField;

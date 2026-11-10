@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taamenak/core/theme/app_colors.dart';
 import 'package:taamenak/core/theme/app_theme.dart';
 import 'package:taamenak/splash_screen.dart';
+import 'package:taamenak/ui/home/tabs/appointments.dart';
+import 'package:taamenak/ui/home/tabs/booking_tab.dart';
+import 'package:taamenak/ui/home/tabs/prescription_tab.dart';
+import 'package:taamenak/ui/home/buttom_navigation_bar.dart';
 import 'package:taamenak/ui/login/login.dart';
+import 'package:taamenak/ui/home/tabs/profile_tab.dart';
 import 'package:taamenak/ui/signup/sign_up.dart';
 import 'package:taamenak/ui/onboarding/onboarding.dart';
 
@@ -35,9 +39,14 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashPage(seenOnboarding: false),
+        '/booking': (context) => const BookingTab(),
+        '/prescriptions': (context) => const PrescriptionTab(),
+        '/appointments': (context) => const AppointmentsTab(),
+        '/profile': (context) => const ProfileTab(),
         '/onboarding': (context) => const OnboardingScreen(),
         '/signup': (context) => const SignupScreen(),
         '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

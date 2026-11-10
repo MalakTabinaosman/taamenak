@@ -1,7 +1,6 @@
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:taamenak/ui/onboarding/onboarding.dart';
-import 'package:taamenak/ui/signup/sign_up.dart';
 
 class SplashPage extends StatelessWidget {
   final bool seenOnboarding;

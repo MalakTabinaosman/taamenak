@@ -39,7 +39,6 @@ class _SignupScreenState extends State<SignupScreen> {
   // دالة تنفيذ التسجيل
   void _submitSignup() {
     if (_formKey.currentState!.validate()) {
-      // TODO: سيتم ربط هذه الدالة بـ Supabase لاحقاً
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('تم التحقق من صحة البيانات بنجاح!')),
       );
@@ -67,7 +66,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   const SizedBox(height: 20),
 
-                  // العنوان الترحيبي والنص الفرعي
                   Column(
                     children: [
                       Text(
@@ -185,7 +183,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                         elevation: 0,
                       ),
-                      onPressed: _submitSignup, // ربط الزر بدالة التحقق
+                      onPressed: () {
+                        _submitSignup(); // ربط الزر بدالة التحقق
+                      }, // ربط الزر بدالة التحقق
                       child: Text(
                         "إنشاء الحساب",
                         style: theme.textTheme.labelLarge?.copyWith(
