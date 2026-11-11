@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:taamenak/core/modal/onboarding_modal.dart';
+import 'package:taamenak/data/models/onboarding_modal.dart';
 import 'package:taamenak/ui/signup/sign_up.dart';
 
 class OnboardingScreen extends StatefulWidget {
