@@ -6,7 +6,16 @@ import 'package:taamenak/data/models/doctor_model.dart';
 import 'package:taamenak/ui/home/tabs/booking/widgets/booking_confirmation_sheet.dart';
 import 'package:taamenak/ui/home/tabs/booking/widgets/doctor_card.dart';
 
+/// ============================================================================
+/// تبويب حجز المواعيد الطبية (BookingTab)
+/// يتيح للمريض:
+/// 1. تصفية الأطباء حسب التخصص (قلب، باطنة، أسنان، عيون، أطفال، عظام، جلدية).
+/// 2. البحث النصي باسم الطبيب، المستشفى، أو التخصص.
+/// 3. استعراض كروت الأطباء [DoctorCard] بالتقييم، أقرب موعد، وحالة تغطية التأمين.
+/// 4. فتح ورقة تأكيد الحجز [showBookingConfirmationSheet] لاختيار الموعد وتأكيد الكشف.
+/// ============================================================================
 class BookingTab extends StatefulWidget {
+  /// اسم المسار
   static const String routeName = '/booking';
 
   const BookingTab({super.key});
@@ -16,10 +25,16 @@ class BookingTab extends StatefulWidget {
 }
 
 class _BookingTabState extends State<BookingTab> {
+  /// وحدة التحكم بحقل البحث
   final TextEditingController _searchController = TextEditingController();
+
+  /// التخصص المختار حالياً (افتراضياً 'الكل')
   String selectedSpecialty = 'الكل';
+
+  /// نص استعلام البحث
   String searchQuery = '';
 
+  /// قائمة التخصصات الطبية المتاحة للتصفية
   final List<String> specialties = const [
     'الكل',
     'قلب وأوعية دموية',
@@ -31,6 +46,7 @@ class _BookingTabState extends State<BookingTab> {
     'جلدية',
   ];
 
+  /// قائمة الأطباء المتاحين في شبكة التأمين
   final List<DoctorModel> allDoctors = const [
     DoctorModel(
       id: 'doc-1',
@@ -84,6 +100,7 @@ class _BookingTabState extends State<BookingTab> {
     ),
   ];
 
+  /// خاصية مساعدة لتصفية الأطباء بناءً على التخصص المختار واستعلام البحث
   List<DoctorModel> get filteredDoctors {
     return allDoctors.where((doc) {
       final matchesSpecialty = selectedSpecialty == 'الكل' ||
@@ -115,7 +132,9 @@ class _BookingTabState extends State<BookingTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Screen Header
+              // ---------------------------------------------------------------
+              // ترويسة الشاشة مع شارة التأمين المعتمد
+              // ---------------------------------------------------------------
               CustomHeader(
                 title: 'احجز موعد',
                 trailing: const HeaderBadge(
@@ -124,13 +143,11 @@ class _BookingTabState extends State<BookingTab> {
                 ),
               ),
 
-              const SizedBox(height: 6),
-
-            
-
               const SizedBox(height: 12),
 
-              // Specialties Chips
+              // ---------------------------------------------------------------
+              // شريط تصنيفات التخصصات الطبية
+              // ---------------------------------------------------------------
               FilterChipBar(
                 items: specialties,
                 selectedItem: selectedSpecialty,
@@ -143,7 +160,9 @@ class _BookingTabState extends State<BookingTab> {
 
               const SizedBox(height: 10),
 
-              // Doctors List
+              // ---------------------------------------------------------------
+              // قائمة الأطباء المتاحين أو حالة خلو النتائج
+              // ---------------------------------------------------------------
               Expanded(
                 child: filteredDoctors.isEmpty
                     ? const EmptyStateWidget(
@@ -159,6 +178,7 @@ class _BookingTabState extends State<BookingTab> {
                           final doc = filteredDoctors[index];
                           return DoctorCard(
                             doctor: doc,
+                            // عند الضغط على "احجز الآن" تُفتح ورقة تأكيد الحجز
                             onBook: () => showBookingConfirmationSheet(
                               context: context,
                               doctor: doc,

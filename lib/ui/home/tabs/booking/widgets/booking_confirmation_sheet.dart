@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:taamenak/core/widgets/app_bottom_sheet.dart';
 import 'package:taamenak/data/models/doctor_model.dart';
 
+/// ============================================================================
+/// دالة فتح ورقة تأكيد حجز الموعد المنبثقة (showBookingConfirmationSheet)
+/// تعرض ورقة سفلية تفاعلية تمكّن المريض من:
+/// 1. استعراض ملخص بيانات الطبيب (الاسم، التخصص، المستشفى).
+/// 2. اختيار اليوم المناسب من قائمة الأيام المتاحة لدى الطبيب.
+/// 3. اختيار الوقت المناسب من الفترات الزمنية المتاحة (Slots).
+/// 4. الضغط على زر "تأكيد الحجز الآن" لإتمام الحجز وعرض رسالة نجاح.
+/// ============================================================================
 void showBookingConfirmationSheet({
   required BuildContext context,
   required DoctorModel doctor,
@@ -22,7 +30,9 @@ void showBookingConfirmationSheet({
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Doctor Summary Card
+            // -----------------------------------------------------------------
+            // كارت ملخص بيانات الطبيب والمستشفى
+            // -----------------------------------------------------------------
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -83,7 +93,9 @@ void showBookingConfirmationSheet({
 
             const SizedBox(height: 16),
 
-            // Select Day
+            // -----------------------------------------------------------------
+            // اختيار اليوم المتاح (أفقي)
+            // -----------------------------------------------------------------
             Text(
               'اختر اليوم',
               style: tt.bodyMedium?.copyWith(
@@ -135,7 +147,9 @@ void showBookingConfirmationSheet({
 
             const SizedBox(height: 16),
 
-            // Select Time Slot
+            // -----------------------------------------------------------------
+            // اختيار وقت الكشف (المواعيد المتاحة)
+            // -----------------------------------------------------------------
             Text(
               'المواعيد المتاحة',
               style: tt.bodyMedium?.copyWith(
@@ -188,7 +202,9 @@ void showBookingConfirmationSheet({
 
             const SizedBox(height: 24),
 
-            // Confirm Button
+            // -----------------------------------------------------------------
+            // زر تأكيد الحجز وإظهار إشعار النجاح
+            // -----------------------------------------------------------------
             SizedBox(
               width: double.infinity,
               child: FilledButton(

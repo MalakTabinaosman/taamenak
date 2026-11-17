@@ -3,8 +3,20 @@ import 'package:taamenak/core/widgets/app_card.dart';
 import 'package:taamenak/core/widgets/status_badge.dart';
 import 'package:taamenak/data/models/prescription_model.dart';
 
+/// ============================================================================
+/// كارت عرض الروشتة في القائمة (PrescriptionCard)
+/// ده الـ Widget اللي بيعرض ملخص طلب الروشتة للمريض:
+/// - أيقونة الروشتة الطبية
+/// - رقم الأوردر أو الطلب (Order Number)
+/// - شارة حالة الصرف (Status Badge) زي "متوفر بالكامل" أو "في انتظار الرد"
+/// - اسم الصيدلية والفرع وتوقيت إرسال الطلب
+/// - عند الضغط عليه بيفتح تفاصيل الروشتة بالكامل في Bottom Sheet
+/// ============================================================================
 class PrescriptionCard extends StatelessWidget {
+  /// بيانات الروشتة الممررة للكارت
   final PrescriptionModel prescription;
+
+  /// الـ Callback function اللي بتتنفذ لما المريض يضغط على الكارت
   final VoidCallback? onTap;
 
   const PrescriptionCard({
@@ -24,7 +36,9 @@ class PrescriptionCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Icon Container
+          // -------------------------------------------------------------------
+          // المربع اللي جواه أيقونة الروشتة بلون الـ Primary
+          // -------------------------------------------------------------------
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -43,11 +57,14 @@ class PrescriptionCard extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // Prescription Info
+          // -------------------------------------------------------------------
+          // تفاصيل الروشتة: رقم الطلب، الحالة، الصيدلية، والوقت
+          // -------------------------------------------------------------------
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // الصف اللي فيه رقم الطلب وشارة الحالة (StatusBadge)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -63,6 +80,8 @@ class PrescriptionCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 4),
+
+                // اسم الصيدلية والفرع
                 Text(
                   '${prescription.pharmacyName} • ${prescription.branch}',
                   style: tt.bodySmall?.copyWith(
@@ -71,6 +90,8 @@ class PrescriptionCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
+
+                // وقت وتاريخ الطلب وملاحظات إضافية لو موجودة
                 Row(
                   children: [
                     Icon(

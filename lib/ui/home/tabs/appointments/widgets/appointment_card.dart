@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:taamenak/core/widgets/app_card.dart';
 import 'package:taamenak/core/widgets/date_badge.dart';
-import 'package:taamenak/core/widgets/status_badge.dart';
 import 'package:taamenak/data/models/appointment_model.dart';
 
+/// ============================================================================
+/// ودجت كارت الموعد الطبي (AppointmentCard)
+/// تعرض الموعد داخل [AppCard] مع:
+/// - شارة تاريخ اليوم والشهر على الطرف [DateBadge]
+/// - عنوان الموعد (اسم الطبيب أو نوع الفحص)
+/// - التخصص أو نوع العيادة
+/// - الوقت والمستشفى مع أيقونات توضيحية
+/// ============================================================================
 class AppointmentCard extends StatelessWidget {
+  /// كائن بيانات الموعد
   final AppointmentModel appointment;
+
+  /// دالة الاستدعاء عند الضغط على الكرت لمعاينة التفاصيل
   final VoidCallback? onTap;
+
+  /// دالة إلغاء الموعد (اختيارية)
   final VoidCallback? onCancel;
 
   const AppointmentCard({
@@ -27,7 +39,7 @@ class AppointmentCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Date Badge
+          // شارة التاريخ البارزة (اليوم والشهر)
           DateBadge(
             day: appointment.day,
             month: appointment.month,
@@ -35,12 +47,12 @@ class AppointmentCard extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // Appointment Details
+          // تفاصيل الموعد الطبي
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title and Status
+                // عنوان الموعد
                 Row(
                   children: [
                     Expanded(
@@ -61,7 +73,7 @@ class AppointmentCard extends StatelessWidget {
 
                 const SizedBox(height: 4),
 
-                // Subtitle
+                // الوصف والتخصص
                 Text(
                   appointment.subtitle,
                   style: tt.bodySmall?.copyWith(
@@ -74,7 +86,7 @@ class AppointmentCard extends StatelessWidget {
 
                 const SizedBox(height: 6),
 
-                // Time and Hospital
+                // وقت الكشف وموقع المستشفى
                 Row(
                   children: [
                     Icon(

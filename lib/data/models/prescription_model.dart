@@ -1,11 +1,30 @@
+// ========================================================
+// نموذج بيانات الروشتة الطبية (PrescriptionModel)
+// يمثل بيانات الروشتات وصرف الأدوية في شاشة الروشتات
+// ========================================================
 class PrescriptionModel {
+  /// المعرف الفريد للروشتة
   final String id;
+
+  /// رقم الطلب أو الروشتة (مثلاً: #RX-8942)
   final String orderNumber;
+
+  /// اسم الصيدلية (مثلاً: صيدليات العزبي)
   final String pharmacyName;
+
+  /// اسم الفرع (مثلاً: فرع المعادي)
   final String branch;
+
+  /// تاريخ صرف أو كتابة الروشتة
   final String dateStr;
+
+  /// حالة الروشتة (مثلاً: جاهزة للاستلام، قيد التحضير، تم الصرف)
   final String status;
+
+  /// عدد الأصناف أو الأدوية الموجودة بالروشتة
   final int itemsCount;
+
+  /// ملاحظات الصيدلي أو تعليمات الاستخدام
   final String notes;
 
   const PrescriptionModel({
@@ -19,6 +38,7 @@ class PrescriptionModel {
     this.notes = '',
   });
 
+  /// دالة لنسخ النموذج مع تعديل بعض القيم
   PrescriptionModel copyWith({
     String? id,
     String? orderNumber,
@@ -40,6 +60,4 @@ class PrescriptionModel {
       notes: notes ?? this.notes,
     );
   }
-
- 
 }

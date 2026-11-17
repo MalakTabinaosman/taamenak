@@ -1,6 +1,15 @@
+// ========================================================
+// نموذج صفحات التعريف بالبرنامج (OnboardingModel)
+// يحتوي على الصور والنصوص التوضيحية التي تظهر للمستخدم الجديد
+// ========================================================
 class OnboardingModel {
+  /// مسار صورة التوضيح من مجلد assets
   final String imagePath;
+
+  /// عنوان الصفحة التوضيحية
   final String title;
+
+  /// الشرح المفصل للميزة
   final String description;
 
   const OnboardingModel({
@@ -9,6 +18,7 @@ class OnboardingModel {
     required this.description,
   });
 
+  /// قائمة الصفحات التوضيحية الثابتة
   static const List<OnboardingModel> onboardingList = [
     OnboardingModel(
       imagePath: "assets/onboarding/onboarding1.png",

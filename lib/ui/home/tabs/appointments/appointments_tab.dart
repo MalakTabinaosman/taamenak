@@ -4,7 +4,14 @@ import 'package:taamenak/core/widgets/empty_state_widget.dart';
 import 'package:taamenak/data/models/appointment_model.dart';
 import 'package:taamenak/ui/home/tabs/appointments/widgets/appointment_card.dart';
 
+/// ============================================================================
+/// تبويب مواعيدي (AppointmentsTab)
+/// يعرض للمريض قائمة المواعيد الطبية المسجلة (كشوفات أطباء، تحاليل، فحوصات دورية)
+/// كل موعد يعرض تاريخ اليوم، اسم الطبيب أو نوع الفحص، المستشفى، والتوقيت،
+/// مع إمكانية عرض الحالة الفارغة [EmptyStateWidget] عند عدم وجود مواعيد.
+/// ============================================================================
 class AppointmentsTab extends StatefulWidget {
+  /// اسم المسار للتنقل
   static const String routeName = '/appointments';
 
   const AppointmentsTab({super.key});
@@ -14,6 +21,7 @@ class AppointmentsTab extends StatefulWidget {
 }
 
 class _AppointmentsTabState extends State<AppointmentsTab> {
+  /// قائمة المواعيد الطبية الحالية للمريض
   List<AppointmentModel> allAppointments = [
     const AppointmentModel(
       id: '1',
@@ -74,18 +82,21 @@ class _AppointmentsTabState extends State<AppointmentsTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Screen Header
-              CustomHeader(title: 'مواعيدي'),
+              // ---------------------------------------------------------------
+              // ترويسة شاشة المواعيد
+              // ---------------------------------------------------------------
+              const CustomHeader(title: 'مواعيدي'),
 
               const SizedBox(height: 10),
 
-              // Content List or Empty State
+              // ---------------------------------------------------------------
+              // قائمة المواعيد أو الحالة الفارغة
+              // ---------------------------------------------------------------
               Expanded(
                 child: allAppointments.isEmpty
                     ? const EmptyStateWidget(
                         icon: Icons.event_note_outlined,
                         title: 'لا توجد مواعيد حالياً',
-                       
                       )
                     : ListView.builder(
                         padding: const EdgeInsets.symmetric(
@@ -115,5 +126,5 @@ class _AppointmentsTabState extends State<AppointmentsTab> {
   }
 }
 
-// Backward compatibility alias
+// تعريف بديل متوافق مع المسميات القديمة
 typedef AppointmentsScreen = AppointmentsTab;

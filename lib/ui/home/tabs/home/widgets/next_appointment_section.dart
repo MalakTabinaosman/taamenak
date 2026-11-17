@@ -3,9 +3,19 @@ import 'package:taamenak/core/widgets/app_card.dart';
 import 'package:taamenak/core/widgets/date_badge.dart';
 import 'package:taamenak/data/models/appointment_model.dart';
 
+/// ============================================================================
+/// ودجت قسم "موعدك القادم" في الصفحة الرئيسية (NextAppointmentSection)
+/// تعرض كرت ملخص لأقرب موعد كشف طبي للمريض (اسم الطبيب، التخصص، المستشفى، الوقت)،
+/// مع شارة التاريخ [DateBadge] ورابط سريع للانتقال إلى "كل المواعيد".
+/// ============================================================================
 class NextAppointmentSection extends StatelessWidget {
+  /// بيانات الموعد القادم (إن وجد)
   final AppointmentModel? appointment;
+
+  /// دالة الانتقال لتبويب كل المواعيد
   final VoidCallback? onViewAll;
+
+  /// دالة الضغط على كرت الموعد لمعاينة التفاصيل
   final VoidCallback? onTap;
 
   const NextAppointmentSection({
@@ -24,6 +34,7 @@ class NextAppointmentSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // صف العنوان ورابط "كل المواعيد"
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -48,6 +59,8 @@ class NextAppointmentSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
+
+        // إذا لم يكن هناك موعد قادم مسجل
         if (appointment == null)
           AppCard(
             child: Padding(
@@ -66,12 +79,14 @@ class NextAppointmentSection extends StatelessWidget {
               ),
             ),
           )
+        // عرض كرت الموعد القادم
         else
           AppCard(
             onTap: onTap,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // شارة اليوم والشهر
                 DateBadge(
                   day: appointment!.day,
                   month: appointment!.month,
@@ -79,6 +94,8 @@ class NextAppointmentSection extends StatelessWidget {
                   height: 64,
                 ),
                 const SizedBox(width: 12),
+
+                // تفاصيل الطبيب والمستشفى والوقت
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

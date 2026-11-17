@@ -5,11 +5,21 @@ import 'package:taamenak/data/models/prescription_model.dart';
 import 'package:taamenak/ui/home/tabs/prescriptions/widgets/prescription_card.dart';
 import 'package:taamenak/ui/home/tabs/prescriptions/widgets/prescription_details_sheet.dart';
 
+/// ============================================================================
+/// تبويب الروشتات الطبية (PrescriptionTab)
+/// يتيح للمريض:
+/// 1. استعراض طلبات صرف الروشتات الطبية السابقة والجارية.
+/// 2. معرفة حالة صرف الدواء من الصيدلية (متوفر بالكامل، متوفر جزئياً، في انتظار الرد).
+/// 3. الضغط على أي روشتة لفتح ورقة التفاصيل الكاملة [showPrescriptionDetailsSheet]
+///    لعرض قائمة الأدوية، التغطية التأمينية، وبيانات الصيدلية.
+/// ============================================================================
 class PrescriptionTab extends StatelessWidget {
+  /// اسم المسار للتنقل
   static const String routeName = '/prescriptions';
 
   const PrescriptionTab({super.key});
 
+  /// قائمة طلبات الروشتات المسجلة
   static const List<PrescriptionModel> _prescriptions = [
     PrescriptionModel(
       id: 'rx-1',
@@ -55,7 +65,9 @@ class PrescriptionTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Screen Header
+              // ---------------------------------------------------------------
+              // ترويسة شاشة الروشتات مع شارة الطلبات
+              // ---------------------------------------------------------------
               CustomHeader(
                 title: 'الروشتات',
                 trailing: const HeaderBadge(
@@ -66,13 +78,14 @@ class PrescriptionTab extends StatelessWidget {
 
               const SizedBox(height: 8),
 
-              // List or Empty State
+              // ---------------------------------------------------------------
+              // قائمة الروشتات أو ودجت الحالة الفارغة
+              // ---------------------------------------------------------------
               Expanded(
                 child: _prescriptions.isEmpty
                     ? const EmptyStateWidget(
                         icon: Icons.receipt_long_outlined,
                         title: 'لا توجد روشتات',
-                      
                       )
                     : ListView.builder(
                         padding: const EdgeInsets.symmetric(
@@ -82,6 +95,7 @@ class PrescriptionTab extends StatelessWidget {
                           final prescription = _prescriptions[index];
                           return PrescriptionCard(
                             prescription: prescription,
+                            // عند الضغط تُفتح تفاصيل الروشتة والأدوية
                             onTap: () => showPrescriptionDetailsSheet(
                               context,
                               prescription,

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// دالة مساعدة لفتح ورقة سفلية منبثقة موحدة التصميم (App Modal Bottom Sheet)
+/// تُستخدم لعرض تفاصيل الروشتات، تأكيد الحجوزات، أو أي نماذج سفلية.
+/// تتضمن شريط سحب علوي، عنوان، وزر إغلاق، وتدعم الـ RTL ورفع الصفحة مع لوحة المفاتيح.
+/// ============================================================================
 Future<T?> showAppModalBottomSheet<T>({
   required BuildContext context,
   required String title,
@@ -31,6 +36,7 @@ Future<T?> showAppModalBottomSheet<T>({
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // مقبض السحب الرمادي الصغير في أعلى النافذة
               Center(
                 child: Container(
                   width: 40,
@@ -42,6 +48,8 @@ Future<T?> showAppModalBottomSheet<T>({
                 ),
               ),
               const SizedBox(height: 14),
+
+              // صف العنوان وزر الإغلاق
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -63,6 +71,8 @@ Future<T?> showAppModalBottomSheet<T>({
                 ],
               ),
               const SizedBox(height: 12),
+
+              // محتوى النافذة الممرر من الصفحة المستدعية
               child,
             ],
           ),

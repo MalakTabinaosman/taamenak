@@ -2,8 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:taamenak/core/widgets/app_card.dart';
 import 'package:taamenak/data/models/doctor_model.dart';
 
+/// ============================================================================
+/// ودجت كرت الطبيب (DoctorCard)
+/// تعرض بيانات الطبيب في قائمة الحجز:
+/// - أيقونة طبية وصورة رمزية
+/// - اسم الطبيب وتخصصه وتقييمه بالنجوم
+/// - اسم المستشفى أو المركز الطبي التابع له
+/// - أقرب موعد متاح للكشف
+/// - زر "احجز الآن" لفتح ورقة تحديد الموعد
+/// ============================================================================
 class DoctorCard extends StatelessWidget {
+  /// كائن بيانات الطبيب
   final DoctorModel doctor;
+
+  /// دالة الاستدعاء عند الضغط على زر "احجز الآن"
   final VoidCallback onBook;
 
   const DoctorCard({
@@ -24,6 +36,7 @@ class DoctorCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // حاوية أيقونة الطبيب
               Container(
                 width: 56,
                 height: 56,
@@ -41,6 +54,8 @@ class DoctorCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
+
+              // بيانات الطبيب: الاسم، التقييم، التخصص، والمستشفى
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,6 +71,7 @@ class DoctorCard extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
+                        // تقييم الطبيب بالنجوم
                         Row(
                           children: [
                             const Icon(
@@ -84,6 +100,7 @@ class DoctorCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
+                    // اسم المستشفى
                     Row(
                       children: [
                         Icon(
@@ -106,9 +123,12 @@ class DoctorCard extends StatelessWidget {
               ),
             ],
           ),
+
           const SizedBox(height: 10),
           const Divider(height: 1, thickness: 0.5),
           const SizedBox(height: 8),
+
+          // الصف السفلي: أقرب موعد متاح وزر الحجز
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -130,6 +150,7 @@ class DoctorCard extends StatelessWidget {
                   ),
                 ],
               ),
+              // زر "احجز الآن"
               SizedBox(
                 height: 36,
                 child: FilledButton(

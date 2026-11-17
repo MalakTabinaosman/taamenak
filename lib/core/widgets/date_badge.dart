@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت شارة التاريخ المربعة (DateBadge)
+/// تُستخدم لعرض موعد أو تاريخ كبطاقة صغيرة منظمة تظهر رقم اليوم في الأعلى
+/// واسم الشهر أو رمزه بالأسفل (مثل "15" / "مايو")، مماثلة لكروت المواعيد الطبية.
+/// ============================================================================
 class DateBadge extends StatelessWidget {
+  /// رقم اليوم (مثال: "22")
   final String day;
+
+  /// اسم أو اختصار الشهر (مثال: "نوفمبر")
   final String month;
+
+  /// عرض الشارة (افتراضياً 64)
   final double width;
+
+  /// ارتفاع الشارة (افتراضياً 72)
   final double height;
 
   const DateBadge({
@@ -34,6 +46,7 @@ class DateBadge extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // نص اليوم
           Text(
             day,
             style: tt.headlineMedium?.copyWith(
@@ -43,6 +56,7 @@ class DateBadge extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 2),
+          // نص الشهر
           Text(
             month,
             style: tt.bodySmall?.copyWith(

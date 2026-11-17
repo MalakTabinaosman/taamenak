@@ -1,12 +1,30 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت عنصر قائمة الملف الشخصي (ProfileMenuItem)
+/// خيار تفاعلي في قائمة الحساب (مثل البيانات الشخصية، المساعدة، تسجيل الخروج)
+/// يتكون من أيقونة داخل مربع ملون، عنوان رئيسي، وصف فرعي، وسهم انتقال.
+/// ============================================================================
 class ProfileMenuItem extends StatelessWidget {
+  /// الأيقونة التعبيرية للعنصر
   final IconData icon;
+
+  /// عنوان العنصر
   final String title;
+
+  /// وصف إضافي أسفل العنوان (اختياري)
   final String? subtitle;
+
+  /// دالة الاستدعاء عند الضغط
   final VoidCallback onTap;
+
+  /// لون الأيقونة المخصص (مثال: أحمر لزر تسجيل الخروج)
   final Color? iconColor;
+
+  /// لون النص المخصص
   final Color? textColor;
+
+  /// هل يتم عرض سهم الانتقال الجانبي
   final bool showChevron;
 
   const ProfileMenuItem({
@@ -43,6 +61,7 @@ class ProfileMenuItem extends StatelessWidget {
         ),
         child: Row(
           children: [
+            // حاوية الأيقونة بخلفية خفيفة
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -52,6 +71,8 @@ class ProfileMenuItem extends StatelessWidget {
               child: Icon(icon, size: 20, color: effectiveIconColor),
             ),
             const SizedBox(width: 12),
+
+            // عنوان ووصف العنصر
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,6 +97,8 @@ class ProfileMenuItem extends StatelessWidget {
                 ],
               ),
             ),
+
+            // سهم التنقل
             if (showChevron)
               Icon(
                 Icons.arrow_back_ios_new,

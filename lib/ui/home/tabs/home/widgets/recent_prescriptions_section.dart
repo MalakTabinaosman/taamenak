@@ -3,9 +3,19 @@ import 'package:taamenak/core/widgets/app_card.dart';
 import 'package:taamenak/core/widgets/status_badge.dart';
 import 'package:taamenak/data/models/prescription_model.dart';
 
+/// ============================================================================
+/// ودجت قسم "آخر طلبات الروشتات" في الصفحة الرئيسية (RecentPrescriptionsSection)
+/// تعرض بطاقة ملخصة لآخر طلب صرف روشتة (رقم الطلب، الصيدلية، الفرع، التاريخ، والحالة)،
+/// مع شارة الحالة الملونة [StatusBadge] ورابط للانتقال إلى "عرض الكل".
+/// ============================================================================
 class RecentPrescriptionsSection extends StatelessWidget {
+  /// بيانات الروشتة الأخيرة (إن وجدت)
   final PrescriptionModel? prescription;
+
+  /// دالة الانتقال لتبويب كل الروشتات
   final VoidCallback? onViewAll;
+
+  /// دالة الضغط على الكرت لفتح تفاصيل الروشتة كاملة
   final VoidCallback? onTap;
 
   const RecentPrescriptionsSection({
@@ -24,6 +34,7 @@ class RecentPrescriptionsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // صف العنوان ورابط عرض كل الروشتات
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -48,6 +59,8 @@ class RecentPrescriptionsSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
+
+        // إذا لم تكن هناك طلبات روشتات مسجلة
         if (prescription == null)
           AppCard(
             child: Padding(
@@ -66,12 +79,14 @@ class RecentPrescriptionsSection extends StatelessWidget {
               ),
             ),
           )
+        // بطاقة ملخص الروشتة
         else
           AppCard(
             onTap: onTap,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // حاوية أيقونة الروشتة
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -88,6 +103,8 @@ class RecentPrescriptionsSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
+
+                // تفاصيل رقم الطلب والصيدلية والحالة
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

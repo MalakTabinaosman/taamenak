@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:taamenak/data/models/user_model.dart';
 
+/// ============================================================================
+/// ودجت بطاقة التأمين الطبي الرقمية (InsuranceCardWidget)
+/// تحاكي بطاقة التأمين البلاستيكية بتصميم أنيق بتدرج لوني أزرق/أخضر وظلال ثلاثية الأبعاد.
+/// تعرض:
+/// - شارة نسبة التغطية التأمينية (مثال: تغطية 85%)
+/// - اسم المريض المسجل
+/// - رقم عضوية التأمين
+/// - رقم الوثيقة وتاريخ انتهاء الصلاحية
+/// ============================================================================
 class InsuranceCardWidget extends StatelessWidget {
+  /// بيانات المستخدم والمريض لعرضها على البطاقة
   final UserModel user;
 
   const InsuranceCardWidget({super.key, required this.user});
@@ -31,6 +41,7 @@ class InsuranceCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // شارة نسبة التغطية التأمينية
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
@@ -49,7 +60,7 @@ class InsuranceCardWidget extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // User Name & Insurance ID
+          // اسم المريض ورقم العضوية
           Text(
             user.name,
             style: const TextStyle(
@@ -70,15 +81,16 @@ class InsuranceCardWidget extends StatelessWidget {
 
           const SizedBox(height: 18),
 
-          // Divider
+          // خط فاصل شفاف داخل البطاقة
           Container(height: 1, color: Colors.white.withValues(alpha: 0.2)),
 
           const SizedBox(height: 12),
 
-          // Bottom details: Policy & Expiry
+          // التفاصيل السفلية: رقم الوثيقة وصلاحية البطاقة
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // رقم الوثيقة
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -100,6 +112,7 @@ class InsuranceCardWidget extends StatelessWidget {
                   ),
                 ],
               ),
+              // تاريخ سريان البطاقة
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [

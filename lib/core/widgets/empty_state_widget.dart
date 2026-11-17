@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت الحالة الفارغة (EmptyStateWidget)
+/// تظهر عند عدم وجود بيانات لعرضها في القائمة (مثل: لا توجد مواعيد سابقة،
+/// لا توجد روشتات، أو لا توجد نتائج بحث مطابقة)، مع زر إجراء اختياري.
+/// ============================================================================
 class EmptyStateWidget extends StatelessWidget {
+  /// الأيقونة التوضيحية للحالة الفارغة
   final IconData icon;
+
+  /// النص التوضيحي الذي يصف سبب فراغ الشاشة
   final String title;
+
+  /// نص زر الإجراء (اختياري، مثلاً: "حجز موعد جديد")
   final String? actionText;
+
+  /// دالة تنفيذ الإجراء عند الضغط على الزر (اختيارية)
   final VoidCallback? onAction;
 
   const EmptyStateWidget({
@@ -26,6 +38,7 @@ class EmptyStateWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // الدائرة الحاضنة للأيقونة
             Container(
               width: 72,
               height: 72,
@@ -40,6 +53,8 @@ class EmptyStateWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+
+            // عنوان ورسالة الحالة الفارغة
             Text(
               title,
               style: tt.titleMedium?.copyWith(
@@ -48,8 +63,8 @@ class EmptyStateWidget extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            
-            
+
+            // زر الإجراء إذا تم تمرير نص ودالة
             if (actionText != null && onAction != null) ...[
               const SizedBox(height: 16),
               OutlinedButton(

@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// شريط تبويبات التصفية المجزأة (FilterTabsBar)
+/// يُستخدم في أعلى القوائم لتبديل العرض بين حالات محددة (مثل: القادمة / السابقة / الملغاة)،
+/// مع إمكانية عرض عداد بجانب كل تبويب وتأثير حركي عند الانتقال.
+/// ============================================================================
 class FilterTabsBar extends StatelessWidget {
+  /// قائمة أسماء التبويبات
   final List<String> tabs;
+
+  /// الفهرس المحدد حالياً
   final int selectedIndex;
+
+  /// دالة الاستدعاء عند اختيار تبويب جديد
   final ValueChanged<int> onTabSelected;
+
+  /// أعداد العناصر لكل تبويب (اختيارية)
   final List<int>? counts;
 
   const FilterTabsBar({
@@ -47,6 +59,7 @@ class FilterTabsBar extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // اسم التبويب
                     Text(
                       tabs[index],
                       style: tt.bodyMedium?.copyWith(
@@ -57,6 +70,7 @@ class FilterTabsBar extends StatelessWidget {
                         fontSize: 13,
                       ),
                     ),
+                    // شارة العداد الصغير إن وجد
                     if (count != null) ...[
                       const SizedBox(width: 6),
                       Container(
@@ -90,9 +104,19 @@ class FilterTabsBar extends StatelessWidget {
   }
 }
 
+/// ============================================================================
+/// شريط الشرائح الأفقية القابلة للتمرير (FilterChipBar)
+/// يُستخدم لتصنيفات الأطباء أو التخصصات (مثل: الكل، باطنة، أسنان، أطفال)،
+/// يتيح التمرير الأفقي بسلاسة مع تمييز العنصر المختار.
+/// ============================================================================
 class FilterChipBar extends StatelessWidget {
+  /// قائمة التصنيفات أو التخصصات
   final List<String> items;
+
+  /// العنصر المحدد حالياً
   final String selectedItem;
+
+  /// دالة الاستدعاء عند اختيار تصنيف
   final ValueChanged<String> onSelected;
 
   const FilterChipBar({

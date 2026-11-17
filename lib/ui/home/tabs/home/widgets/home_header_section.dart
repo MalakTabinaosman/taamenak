@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت ترويسة الصفحة الرئيسية (HomeHeaderSection)
+/// تعرض رسالة الترحيب باسم المريض المسجل (مجلوبة من UserSession)،
+/// بجانب زر الإشعارات بإطار أنيق وظل ناعم.
+/// ============================================================================
 class HomeHeaderSection extends StatelessWidget {
+  /// اسم المريض المعروض في الترحيب
   final String userName;
+
+  /// دالة الضغط على زر الإشعارات
   final VoidCallback? onNotificationTap;
 
   const HomeHeaderSection({
@@ -19,6 +27,7 @@ class HomeHeaderSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // عمود الترحيب واسم المريض
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -41,7 +50,7 @@ class HomeHeaderSection extends StatelessWidget {
           ],
         ),
 
-        // Notifications Button
+        // زر التنبيهات والإشعارات
         Container(
           decoration: BoxDecoration(
             color: cs.surface,

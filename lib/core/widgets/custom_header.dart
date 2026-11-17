@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت الترويسة المخصصة للشاشات (CustomHeader)
+/// تُستخدم في أعلى الشاشات أو التبويبات لعرض العنوان الرئيسي، العنوان الفرعي،
+/// زر الرجوع (اختياري)، وعنصر إضافي على الطرف الآخر مثل شارة أو زر إجراء.
+/// ============================================================================
 class CustomHeader extends StatelessWidget {
+  /// العنوان الرئيسي للشاشة
   final String title;
+
+  /// عنوان فرعي توضيحي أسفل العنوان الرئيسي
   final String? subtitle;
+
+  /// عنصر على الطرف المقابل (مثل شارة أو أيقونة)
   final Widget? trailing;
+
+  /// دالة الرجوع للخلف، عند تمريرها يظهر سهم الرجوع
   final VoidCallback? onBack;
 
   const CustomHeader({
@@ -29,6 +41,7 @@ class CustomHeader extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
+                // سهم الرجوع إذا كانت دالة onBack موجودة
                 if (onBack != null) ...[
                   IconButton(
                     onPressed: onBack,
@@ -39,6 +52,7 @@ class CustomHeader extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                 ],
+                // عمود العنوان والعنوان الفرعي
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,6 +81,7 @@ class CustomHeader extends StatelessWidget {
               ],
             ),
           ),
+          // العنصر الإضافي على اليمين/اليسار إن وجد
           ?trailing,
         ],
       ),
@@ -74,10 +89,21 @@ class CustomHeader extends StatelessWidget {
   }
 }
 
+/// ============================================================================
+/// ودجت الشارة الجانبية للترويسة (HeaderBadge)
+/// شارة ملونة توضع في الترويسة لعرض عداد أو معلومة سريعة مع أيقونة وخلفية شفافة.
+/// ============================================================================
 class HeaderBadge extends StatelessWidget {
+  /// النص المكتوب داخل الشارة
   final String label;
+
+  /// الأيقونة التعبيرية بجانب النص
   final IconData? icon;
+
+  /// اللون المخصص للشارة (افتراضياً لون الثيم الأساسي)
   final Color? color;
+
+  /// دالة الضغط على الشارة في حال كانت تفاعلية
   final VoidCallback? onTap;
 
   const HeaderBadge({
@@ -121,6 +147,7 @@ class HeaderBadge extends StatelessWidget {
       ),
     );
 
+    // دعم إمكانية النقر في حال تمرير onTap
     if (onTap != null) {
       return InkWell(
         onTap: onTap,

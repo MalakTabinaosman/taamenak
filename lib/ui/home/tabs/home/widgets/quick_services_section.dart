@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
+/// ============================================================================
+/// ودجت قسم الخدمات السريعة (QuickServicesSection)
+/// تعرض صفاً من الأزرار المختصرة بأيقونات مميزة للوصول السريع إلى:
+/// - مواعيدي (الانتقال لتبويب المواعيد)
+/// - التحاليل والأشعة (الانتقال لتبويب الحجز)
+/// - صور الروشتة (الانتقال لتبويب الروشتات)
+/// - احجز دكتور (الانتقال لتبويب الحجز المباشر)
+/// ============================================================================
 class QuickServicesSection extends StatelessWidget {
+  /// دالة التنقل عند النقر على أي خدمة لتفعيل التبويب المستهدف
   final ValueChanged<int>? onServiceTap;
 
   const QuickServicesSection({super.key, this.onServiceTap});
@@ -10,6 +19,7 @@ class QuickServicesSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // عنوان قسم الخدمات السريعة
         Text(
           'خدمات سريعة',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -18,6 +28,8 @@ class QuickServicesSection extends StatelessWidget {
               ),
         ),
         const SizedBox(height: 10),
+
+        // صف أيقونات الخدمات السريعة
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,9 +72,18 @@ class QuickServicesSection extends StatelessWidget {
   }
 }
 
+/// ============================================================================
+/// ودجت زر الخدمة السريعة الفردي (QuickServiceItem)
+/// تتكون من صندوق دائري الحواف بداخله أيقونة ملونة، وأسفله النص التوضيحي.
+/// ============================================================================
 class QuickServiceItem extends StatelessWidget {
+  /// أيقونة الخدمة
   final IconData icon;
+
+  /// عنوان الخدمة المعروض أسفل الأيقونة
   final String label;
+
+  /// دالة الاستدعاء عند الضغط
   final VoidCallback? onTap;
 
   const QuickServiceItem({
@@ -81,6 +102,7 @@ class QuickServiceItem extends StatelessWidget {
       onTap: onTap,
       child: Column(
         children: [
+          // الحاوية المربعة المستديرة للأيقونة
           Container(
             width: 58,
             height: 58,
@@ -101,6 +123,8 @@ class QuickServiceItem extends StatelessWidget {
             child: Icon(icon, color: cs.primary, size: 26),
           ),
           const SizedBox(height: 6),
+
+          // تسمية الخدمة
           Text(
             label,
             style: theme.textTheme.labelMedium?.copyWith(

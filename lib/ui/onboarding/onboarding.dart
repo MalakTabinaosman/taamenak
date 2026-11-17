@@ -5,7 +5,14 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:taamenak/data/models/onboarding_modal.dart';
 import 'package:taamenak/ui/signup/sign_up.dart';
 
+/// ============================================================================
+/// شاشة التعريف بالتطبيق والترحيب (OnboardingScreen)
+/// تظهر للمستخدم عند فتح التطبيق لأول مرة لشرح مميزات التطبيق الطبية والتأمينية،
+/// تحتوي على شرائح متحركة، مؤشر تقدم تفاعلي، وزر "التالي" أو "ابدأ الآن".
+/// يتم حفظ حالة المشاهدة في [SharedPreferences] حتى لا تظهر مجدداً.
+/// ============================================================================
 class OnboardingScreen extends StatefulWidget {
+  /// اسم المسار للتنقل
   static const String routeName = '/onboarding';
 
   const OnboardingScreen({super.key});
@@ -15,22 +22,28 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  /// وحدة التحكم في تقليب الصفحات
   final PageController _pageController = PageController();
+
+  /// فهرس الشريحة المعروضة حالياً
   int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
+    // ضبط وضع الشاشة لملء الشاشة بالكامل أثناء العرض الترحيبي
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
 
   @override
   void dispose() {
+    // إعادة شريط الحالة والأزرار النظامية للوضع الطبيعي
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _pageController.dispose();
     super.dispose();
   }
 
+  /// إنهاء مرحلة التعريف، حفظ حالة المشاهدة، والانتقال لشاشة التسجيل
   Future<void> _finishOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seenOnboarding', true);
@@ -39,6 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Navigator.pushReplacementNamed(context, SignupScreen.routeName);
   }
 
+  /// معالجة الضغط على زر "التالي" أو الانتقال للشريحة التالية أو الإنهاء
   void _onNextPressed(int itemsCount) async {
     if (_currentIndex < itemsCount - 1) {
       _pageController.nextPage(
@@ -58,7 +72,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header: Back & Skip Buttons
+            // -----------------------------------------------------------------
+            // الترويسة العلوية: زر "تخطي" لتجاوز الشرائح فوراً
+            // -----------------------------------------------------------------
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20.0,
@@ -67,24 +83,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                /*  IconButton(
-                    iconSize: 18,
-                    onPressed: _currentIndex > 1
-                        ? () {
-                            _pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        : null,
-                    icon: const Icon(Icons.arrow_back_ios),
-                    color: _currentIndex > 0
-                        ? Theme.of(context).primaryColor
-                        : Theme.of(context).disabledColor,
-                  ),*/
                   TextButton(
                     onPressed: () async {
-                      // عند الضغط على تخطي، يتم حفظ الحالة والانتقال مباشرة
+                      // عند الضغط على تخطي، يتم حفظ الحالة والانتقال مباشرة للتسجيل
                       await _finishOnboarding();
                     },
                     child: Text(
@@ -97,7 +98,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // PageView Builder لعرض صور الـ Onboarding
+            // -----------------------------------------------------------------
+            // عارض الصفحات (PageView) لعرض الصور التوضيحية
+            // -----------------------------------------------------------------
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
@@ -114,6 +117,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Spacer(),
+                      // حاوية الصورة التوضيحية
                       Container(
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -134,12 +138,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // Bottom Container: Titles, Indicators, & Action Button
+            // -----------------------------------------------------------------
+            // الحاوية السفلية: العناوين، النقاط المؤشرة، وزر المتابعة
+            // -----------------------------------------------------------------
             Container(
               padding: const EdgeInsets.all(24),
-              decoration: const BoxDecoration(
-                color: Color(0xFFF0F4F8),
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),
                 ),
@@ -147,6 +153,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // عنوان الشريحة
                   Text(
                     OnboardingModel.onboardingList[_currentIndex].title,
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
@@ -156,15 +163,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 12),
+                  // الوصف التوضيحي للشريحة
                   Text(
                     OnboardingModel.onboardingList[_currentIndex].description,
                     style: Theme.of(context).textTheme.bodyMedium!
-                        .copyWith(color: Colors.grey.shade700),
+                        .copyWith(color: Theme.of(context).disabledColor),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
 
-                  // Smooth Page Indicator
+                  // نقاط مؤشر التقليب التفاعلية (Smooth Page Indicator)
                   SmoothPageIndicator(
                     controller: _pageController,
                     count: itemsCount,
@@ -179,7 +187,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Action Button (Next / Get Started)
+                  // زر الإجراء الرئيسي (التالي / ابدأ الآن)
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -197,7 +205,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ? 'ابدأ الآن'
                             : 'التالي',
                         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.onPrimary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

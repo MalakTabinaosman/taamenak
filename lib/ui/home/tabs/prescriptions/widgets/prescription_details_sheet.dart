@@ -3,6 +3,13 @@ import 'package:taamenak/core/widgets/app_bottom_sheet.dart';
 import 'package:taamenak/data/models/prescription_model.dart';
 import 'package:taamenak/ui/home/tabs/prescriptions/widgets/prescription_card.dart';
 
+/// ============================================================================
+/// دالة فتح تفاصيل الروشتة (showPrescriptionDetailsSheet)
+/// بتفتح Modal Bottom Sheet بيعرض كل تفاصيل الروشتة للمريض:
+/// 1. كارت الروشتة الأساسي [PrescriptionCard] بمعلومات الصيدلية والطلب.
+/// 2. عدد الأصناف والأدوية المطلوبة المعتمدة في التأمين.
+/// 3. نسبة التحمل والتغطية التأمينية (Insurance Coverage).
+/// ============================================================================
 void showPrescriptionDetailsSheet(
   BuildContext context,
   PrescriptionModel prescription,
@@ -14,9 +21,11 @@ void showPrescriptionDetailsSheet(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // كارت الروشتة العلوي
         PrescriptionCard(prescription: prescription),
         const SizedBox(height: 14),
 
+        // معلومة الأدوية المطلوبة وعدد الأصناف
         _buildInfoTile(
           context: context,
           icon: Icons.medication_outlined,
@@ -25,6 +34,7 @@ void showPrescriptionDetailsSheet(
         ),
         const SizedBox(height: 10),
 
+        // معلومة نسبة التحمل والتغطية التأمينية
         _buildInfoTile(
           context: context,
           icon: Icons.health_and_safety_outlined,
@@ -38,6 +48,10 @@ void showPrescriptionDetailsSheet(
   );
 }
 
+/// ============================================================================
+/// دالة مساعدة لبناء عنصر معلومة (Info Tile)
+/// بتعمل Container بخلفية هادية وأيقونة ونصين (العنوان والقيمة).
+/// ============================================================================
 Widget _buildInfoTile({
   required BuildContext context,
   required IconData icon,
@@ -56,8 +70,10 @@ Widget _buildInfoTile({
     ),
     child: Row(
       children: [
+        // الأيقونة بلون الـ Primary
         Icon(icon, size: 20, color: cs.primary),
         const SizedBox(width: 10),
+        // نصوص العنوان والقيمة
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
