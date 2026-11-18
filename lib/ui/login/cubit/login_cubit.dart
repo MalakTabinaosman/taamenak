@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   /// دالة تسجيل الدخول
   Future<void> login({
-    required String emailOrPhone,
+    required String emailAuth,
     required String password,
   }) async {
     // 1. إطلاق حالة التحميل
@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       // 2. التحقق من صحة البيانات وجلب دور المستخدم وحالته
       final result = await _authService.signIn(
-        emailOrPhoneOrUsername: emailOrPhone,
+      emailAuth: emailAuth,
         password: password,
       );
 

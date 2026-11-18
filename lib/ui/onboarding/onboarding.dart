@@ -45,9 +45,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   /// إنهاء مرحلة التعريف، حفظ حالة المشاهدة، والانتقال لشاشة التسجيل
   Future<void> _finishOnboarding() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('seenOnboarding', true);
-
     if (!mounted) return;
     Navigator.pushReplacementNamed(context, SignupScreen.routeName);
   }
@@ -144,7 +141,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+                color: Theme.of(context).colorScheme.primary
+                    .withValues(alpha: 0.05),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(24),
                   topRight: Radius.circular(24),

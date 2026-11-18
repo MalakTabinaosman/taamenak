@@ -3,11 +3,12 @@ import 'package:taamenak/core/widgets/custom_header.dart';
 import 'package:taamenak/core/widgets/empty_state_widget.dart';
 import 'package:taamenak/data/models/appointment_model.dart';
 import 'package:taamenak/ui/home/tabs/appointments/widgets/appointment_card.dart';
+import 'package:taamenak/ui/home/tabs/appointments/widgets/appointment_details_sheet.dart';
 
 /// ============================================================================
 /// تبويب مواعيدي (AppointmentsTab)
 /// يعرض للمريض قائمة المواعيد الطبية المسجلة (كشوفات أطباء، تحاليل، فحوصات دورية)
-/// كل موعد يعرض تاريخ اليوم، اسم الطبيب أو نوع الفحص، المستشفى، والتوقيت،
+/// كل موعد يعرض تاريخ اليوم، اسم الطبيب أو نوع الفحص، المستشفى، والتوقيت，
 /// مع إمكانية عرض الحالة الفارغة [EmptyStateWidget] عند عدم وجود مواعيد.
 /// ============================================================================
 class AppointmentsTab extends StatefulWidget {
@@ -108,11 +109,17 @@ class _AppointmentsTabState extends State<AppointmentsTab> {
                           final appointment = allAppointments[index];
                           return AppointmentCard(
                             appointment: appointment,
-                            onTap: () => (
+                            onTap: () => showAppointmentDetailsSheet(
                               context: context,
                               appointment: appointment,
-                              onCancel: () => (appointment),
-                              onReschedule: () => (appointment, '٠٢:٠٠ م'),
+                              onCancel: () {
+                                setState(() {
+                                  allAppointments.removeAt(index);
+                                });
+                              },
+                              onReschedule: (newTime) {
+                                // إعادة جدولة الموعد
+                              },
                             ),
                           );
                         },

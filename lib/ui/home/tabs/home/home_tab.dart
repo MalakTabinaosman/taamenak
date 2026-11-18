@@ -6,6 +6,7 @@ import 'package:taamenak/ui/home/tabs/home/widgets/home_header_section.dart';
 import 'package:taamenak/ui/home/tabs/home/widgets/next_appointment_section.dart';
 import 'package:taamenak/ui/home/tabs/home/widgets/quick_services_section.dart';
 import 'package:taamenak/ui/home/tabs/home/widgets/recent_prescriptions_section.dart';
+import 'package:taamenak/ui/home/tabs/appointments/widgets/appointment_details_sheet.dart';
 import 'package:taamenak/ui/home/tabs/prescriptions/widgets/prescription_details_sheet.dart';
 
 /// ============================================================================
@@ -84,7 +85,7 @@ class HomeTab extends StatelessWidget {
                 NextAppointmentSection(
                   appointment: sampleNextAppointment,
                   onViewAll: () => onNavigateTab?.call(3), // التوجه لتبويب المواعيد
-                  onTap: () => (
+                  onTap: () => showAppointmentDetailsSheet(
                     context: context,
                     appointment: sampleNextAppointment,
                   ),

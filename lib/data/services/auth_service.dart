@@ -91,10 +91,10 @@ class AuthService {
   // يدعم الدخول بـ (البريد، أو الهاتف، أو اسم المستخدم)
   // --------------------------------------------------------
   Future<Map<String, dynamic>> signIn({
-    required String emailOrPhoneOrUsername,
+    required String emailAuth,
     required String password,
   }) async {
-    String input = emailOrPhoneOrUsername.trim();
+    String input = emailAuth.trim();
     String email = input;
 
     // أ) في حال لم يدخل بريداً (لا يحتوي على @)، نبحث في قاعدة البيانات عن الإيميل المرتبط به

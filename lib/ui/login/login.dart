@@ -28,8 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
   /// مفتاح النموذج للتحقق من صحة المدخلات
   final _formKey = GlobalKey<FormState>();
 
-  /// متحكم حقل اسم المستخدم أو البريد أو الهاتف
-  final TextEditingController _emailOrPhoneController = TextEditingController();
+  /// متحكم حقل البريد الإلكتروني
+  final TextEditingController _emailController = TextEditingController();
 
   /// متحكم حقل كلمة المرور
   final TextEditingController _passwordController = TextEditingController();
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    _emailOrPhoneController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submitLogin(BuildContext context) {
     if (_formKey.currentState!.validate()) {
       context.read<LoginCubit>().login(
-        emailOrPhone: _emailOrPhoneController.text,
+        emailAuth: _emailController.text,
         password: _passwordController.text,
       );
     }
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-                } 
+                }
                 // في حالة نجاح تسجيل دخول موظف أو مدير
                 else if (state is LoginStaffSuccess) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     context,
                     AdminDashboardScreen.routeName,
                   );
-                } 
+                }
                 // في حال كان حساب المريض لا يزال بانتظار مراجعة الإدارة
                 else if (state is LoginPendingApproval) {
                   _showNoticeDialog(
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icons.hourglass_top_rounded,
                     color: theme.colorScheme.primary,
                   );
-                } 
+                }
                 // في حال رفض حساب المريض
                 else if (state is LoginRejected) {
                   _showNoticeDialog(
@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icons.cancel_outlined,
                     color: theme.colorScheme.error,
                   );
-                } 
+                }
                 // في حال وجود خطأ في البيانات أو الاتصال
                 else if (state is LoginError) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -252,10 +252,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       // 1. حقل البريد الإلكتروني أو الهاتف أو اسم المستخدم
                       // -------------------------------------------------------
                       customTextField(
-                        label: "البريد الإلكتروني أو الهاتف أو اسم المستخدم",
-                        hint: "البريد أو الهاتف أو اسم المستخدم",
+                        label: "البريد الإلكتروني",
+                        hint: "البريد الإلكتروني",
                         icon: Icons.person_outline,
-                        controller: _emailOrPhoneController,
+                        controller: _emailController,
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
